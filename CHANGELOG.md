@@ -1,6 +1,7 @@
 # Changelog — lxr-radial
 
 ## 3.0.0 — 2026-09-19
+* Fix: `LXRCore.PlayerData` stays current — the core object comes back as a copy, so cash, job and metadata never changed after login in this resource. It now listens to `lxr:client:data` / `lxr:client:unloaded` and refreshes its copy.
 * LXRCore v3 release line: every resource ships as 3.0.0 from here (the entries below are the road to it).
 
 ## 1.0.1 — 2026-09-19
