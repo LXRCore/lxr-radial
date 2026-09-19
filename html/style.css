@@ -1,0 +1,23 @@
+/* LXR-RADIAL — the wheel on top of lxr-ui.css. No colours here: every value is a kit token. */
+.lxr body, .lxr { background: transparent; }
+.lxr .rd { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; font-family: var(--lxr-font-plain); }
+.lxr .rd::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 50%, rgba(5,5,6,.55) 0, rgba(5,5,6,.35) 32vh, transparent 60vh); pointer-events: none; }
+.lxr .rd__ring { width: 62vh; height: 62vh; max-width: 92vw; max-height: 92vw; overflow: visible; }
+.lxr .rd__seg { fill: var(--lxr-panel-solid); stroke: var(--lxr-bone-26); stroke-width: 1; cursor: pointer; transition: fill var(--lxr-fast) var(--lxr-ease); }
+.lxr .rd__seg:hover, .lxr .rd__seg.is-on { fill: var(--lxr-blood-34); stroke: var(--lxr-blood-lit); }
+.lxr .rd__seg.is-off { fill: rgba(5,5,6,.45); }
+.lxr .rd__ico { pointer-events: none; fill: none; stroke: var(--lxr-bone); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.lxr .rd__seg.is-off + .rd__ico { stroke: var(--lxr-smoke); }
+.lxr .rd__more { pointer-events: none; fill: var(--lxr-blood-lit); }
+.lxr .rd__state { pointer-events: none; fill: var(--lxr-ok); }
+.lxr .rd__state.is-off { fill: var(--lxr-smoke); }
+.lxr .rd__txt { pointer-events: none; fill: var(--lxr-ash); font-family: var(--lxr-font-code); font-size: 9px; letter-spacing: 1px; text-transform: uppercase; text-anchor: middle; }
+
+.lxr .rd__center { position: absolute; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; width: 20vh; height: 20vh; border-radius: 50%; background: var(--lxr-void); border: 1px solid var(--lxr-edge); pointer-events: none; text-align: center; }
+.lxr .rd__logo { width: 26px; height: 26px; object-fit: contain; opacity: .9; }
+.lxr .rd__label { font-family: var(--lxr-font-display); font-size: 22px; line-height: 1.05; color: var(--lxr-bone); max-width: 18vh; }
+.lxr .rd__sub { font-size: var(--lxr-text-micro); letter-spacing: var(--lxr-track-mono); text-transform: uppercase; color: var(--lxr-smoke); }
+.lxr .rd__sub.is-on { color: var(--lxr-ok); } .lxr .rd__sub.is-off { color: var(--lxr-smoke); }
+.lxr .rd__hints { position: absolute; bottom: 8vh; left: 50%; transform: translateX(-50%); display: flex; gap: var(--lxr-s2); align-items: center; font-size: var(--lxr-text-micro); }
+.lxr .rd__hints .lxr-key { margin-left: var(--lxr-s3); }
+.lxr.lang-ka .rd__label { font-family: var(--lxr-font-ka); text-transform: none; letter-spacing: 0; }
