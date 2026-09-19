@@ -1,11 +1,11 @@
 /* LXR-RADIAL — the wheel on top of lxr-ui.css. No colours here: every value is a kit token. */
 .lxr body, .lxr { background: transparent; }
 .lxr .rd { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; font-family: var(--lxr-font-plain); }
-.lxr .rd::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 50%, rgba(5,5,6,.55) 0, rgba(5,5,6,.35) 32vh, transparent 60vh); pointer-events: none; }
+.lxr .rd::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 50%, var(--lxr-panel-solid) 0, var(--lxr-blood-34) 32vh, transparent 60vh); opacity: .6; pointer-events: none; }
 .lxr .rd__ring { width: 62vh; height: 62vh; max-width: 92vw; max-height: 92vw; overflow: visible; }
 .lxr .rd__seg { fill: var(--lxr-panel-solid); stroke: var(--lxr-bone-26); stroke-width: 1; cursor: pointer; transition: fill var(--lxr-fast) var(--lxr-ease); }
 .lxr .rd__seg:hover, .lxr .rd__seg.is-on { fill: var(--lxr-blood-34); stroke: var(--lxr-blood-lit); }
-.lxr .rd__seg.is-off { fill: rgba(5,5,6,.45); }
+.lxr .rd__seg.is-off { fill: var(--lxr-panel-solid); opacity: .6; }
 .lxr .rd__ico { pointer-events: none; fill: none; stroke: var(--lxr-bone); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 .lxr .rd__seg.is-off + .rd__ico { stroke: var(--lxr-smoke); }
 .lxr .rd__more { pointer-events: none; fill: var(--lxr-blood-lit); }
