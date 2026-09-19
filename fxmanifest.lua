@@ -34,7 +34,7 @@ lua54 'yes'
 name 'lxr-radial'
 author 'iBoss21 / LXRCore'
 description 'LXRCore v3 action wheel on the LXR UI Kit — clothing, horse, duty, satchel; nested rings; entries from any resource'
-version '1.0.0'
+version '1.0.1'
 repository 'https://github.com/LXRCore/lxr-radial'
 
 shared_scripts {

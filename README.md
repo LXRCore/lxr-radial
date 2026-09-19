@@ -35,7 +35,8 @@ Nothing runs while the key is up.
 An entry does one of: `sub` (a ring), `event`, `serverEvent`, `command`,
 `export = { resource, fn, args }`, or `dynamic = 'clothing'` (built on open
 from lxr-clothing's `Wearing()`; each worn category toggles through
-`ToggleCategory`). `show` limits it to contexts. Labels are locale keys or text;
+`ToggleCategory`). When **lxr-clothingradial** is running, the *Clothing* entry
+hands over to that wheel instead of opening a ring here. `show` limits it to contexts. Labels are locale keys or text;
 icons are names from `html/app.js` `ICONS` (the wardrobe categories are all
 there).
 
@@ -61,6 +62,7 @@ goes back a ring, Esc closes.
 ensure lxr-core
 ensure lxr-clothing     # for the clothing ring
 ensure lxr-radial
+ensure lxr-clothingradial   # optional: the clothing wheel takes the Clothing entry
 ```
 
 Questions, bugs, ideas: [discord.gg/GAhk8cgXe9](https://discord.gg/GAhk8cgXe9)

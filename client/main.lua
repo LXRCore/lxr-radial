@@ -63,7 +63,10 @@ local function build(list, ctx, path)
         if shown(e, ctx) then
             local id = e.id
             local row = { id = id, label = label(e), icon = e.icon, state = e.state }
-            if e.dynamic and dynamic[e.dynamic] then
+            if e.dynamic == 'clothing' and GetResourceState('lxr-clothingradial') == 'started' then
+                -- the clothing wheel is its own resource when present: this entry hands over to it
+                e = { id = id, label = e.label, icon = e.icon, run = function() Wait(100) exports['lxr-clothingradial']:open('clothing') end }
+            elseif e.dynamic and dynamic[e.dynamic] then
                 local sub = dynamic[e.dynamic]()
                 if #sub > 0 then row.sub = build(sub, ctx, id) end
             elseif e.sub then
