@@ -1,17 +1,20 @@
 /* LXR-RADIAL — the wheel on top of lxr-ui.css. No colours here: every value is a kit token. */
 .lxr body, .lxr { background: transparent; }
 .lxr .rd { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; font-family: var(--lxr-font-plain); }
-.lxr .rd::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 50%, var(--lxr-panel-solid) 0, var(--lxr-blood-34) 32vh, transparent 60vh); opacity: .6; pointer-events: none; }
+.lxr .rd::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 50%, var(--lxr-void) 0, var(--lxr-panel-solid) 30vh, transparent 60vh); opacity: .85; pointer-events: none; }
 .lxr .rd__ring { width: 62vh; height: 62vh; max-width: 92vw; max-height: 92vw; overflow: visible; }
-.lxr .rd__seg { fill: var(--lxr-panel-solid); stroke: var(--lxr-bone-26); stroke-width: 1; cursor: pointer; transition: fill var(--lxr-fast) var(--lxr-ease); }
+.lxr .rd__seg { fill: var(--lxr-pit); stroke: var(--lxr-bone-26); stroke-width: 1; cursor: pointer; transition: fill var(--lxr-fast) var(--lxr-ease); }
 .lxr .rd__seg:hover, .lxr .rd__seg.is-on { fill: var(--lxr-blood-34); stroke: var(--lxr-blood-lit); }
 .lxr .rd__seg.is-off { fill: var(--lxr-panel-solid); opacity: .6; }
-.lxr .rd__ico { pointer-events: none; fill: none; stroke: var(--lxr-bone); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.lxr .rd__ico { pointer-events: none; fill: none; stroke: var(--lxr-bone); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
 .lxr .rd__seg.is-off + .rd__ico { stroke: var(--lxr-smoke); }
 .lxr .rd__more { pointer-events: none; fill: var(--lxr-blood-lit); }
 .lxr .rd__state { pointer-events: none; fill: var(--lxr-ok); }
 .lxr .rd__state.is-off { fill: var(--lxr-smoke); }
-.lxr .rd__txt { pointer-events: none; fill: var(--lxr-ash); font-family: var(--lxr-font-code); font-size: 9px; letter-spacing: 1px; text-transform: uppercase; text-anchor: middle; }
+.lxr .rd__arc { pointer-events: none; fill: var(--lxr-blood-lit); opacity: 0; transition: opacity var(--lxr-fast) var(--lxr-ease); }
+.lxr .rd__arc.is-on { opacity: 1; }
+.lxr .rd__cico { width: 34px; height: 34px; fill: none; stroke: var(--lxr-bone); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.lxr .rd__center .rd__logo { position: absolute; top: 14px; width: 18px; height: 18px; opacity: .5; }
 
 .lxr .rd__center { position: absolute; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; width: 20vh; height: 20vh; border-radius: 50%; background: var(--lxr-void); border: 1px solid var(--lxr-edge); pointer-events: none; text-align: center; }
 .lxr .rd__logo { width: 26px; height: 26px; object-fit: contain; opacity: .9; }

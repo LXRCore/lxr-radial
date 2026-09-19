@@ -30,6 +30,8 @@
   }
 
   function current() { return stack[stack.length - 1]; }
+  const cico = document.getElementById('cico');
+  function centerIcon(name) { if (!name) { cico.classList.add('lxr-hidden'); return; } cico.classList.remove('lxr-hidden'); cico.querySelector('path').setAttribute('d', ICONS[name] || ICONS.paper); }
   function draw() {
     const list = current().list;
     ring.innerHTML = '';
@@ -37,20 +39,21 @@
     list.forEach((e, i) => {
       const a0 = -Math.PI / 2 + (i / n) * Math.PI * 2 + gap, a1 = -Math.PI / 2 + ((i + 1) / n) * Math.PI * 2 - gap;
       const seg = el('path', { d: segment(r0, r1, a0, a1), class: 'rd__seg' + (e.state === 'off' ? ' is-off' : '') + (e.empty ? ' is-off' : '') });
-      // icon above, name below, both on the segment's middle radius
-      const mid = (a0 + a1) / 2, [cx, cy] = polar((r0 + r1) / 2 + 4, mid);
-      const g = el('g', { class: 'rd__ico', transform: `translate(${cx - 14} ${cy - 26}) scale(1.17)` });
+      // the segment carries only its icon; the name shows in the centre while it is under the cursor
+      const mid = (a0 + a1) / 2, [cx, cy] = polar((r0 + r1) / 2 + 2, mid);
+      const sc = n > 8 ? 1.4 : 1.7;
+      const g = el('g', { class: 'rd__ico', transform: `translate(${cx - 12 * sc} ${cy - 12 * sc}) scale(${sc})` });
       g.appendChild(el('path', { d: ICONS[e.icon] || ICONS.paper }));
-      const txt = el('text', { x: cx, y: cy + 20, class: 'rd__txt' });
-      txt.textContent = (e.label || '').length > 14 ? e.label.slice(0, 13) + '…' : e.label;
-      ring.appendChild(seg); ring.appendChild(g); ring.appendChild(txt);
-      if (e.sub) { const [mx, my] = polar(r1 - 10, mid); ring.appendChild(el('circle', { cx: mx, cy: my, r: 3, class: 'rd__more' })); }
-      if (e.state) { const [sx, sy] = polar(r0 + 12, mid); ring.appendChild(el('circle', { cx: sx, cy: sy, r: 3, class: 'rd__state' + (e.state === 'off' ? ' is-off' : '') })); }
-      seg.addEventListener('mouseenter', () => { hover = e; label.textContent = e.label; sub.textContent = e.state ? t('ui.' + e.state) : (e.sub ? '›' : (e.empty ? t('ui.empty') : '')); sub.className = 'rd__sub lxr-mono' + (e.state ? ' is-' + e.state : ''); post('sound', { name: 'NAV_UP' }); });
-      seg.addEventListener('mouseleave', () => { if (hover === e) { hover = null; label.textContent = current().title; sub.textContent = ''; sub.className = 'rd__sub lxr-mono'; } });
+      // the red arc on the rim, lit while the segment is under the cursor
+      const arc = el('path', { d: segment(r1 + 3, r1 + 7, a0, a1), class: 'rd__arc' });
+      ring.appendChild(seg); ring.appendChild(g); ring.appendChild(arc);
+      if (e.sub) { const [mx, my] = polar(r0 + 12, mid); ring.appendChild(el('circle', { cx: mx, cy: my, r: 2.5, class: 'rd__more' })); }
+      if (e.state) { const [sx, sy] = polar(r1 - 12, mid); ring.appendChild(el('circle', { cx: sx, cy: sy, r: 3, class: 'rd__state' + (e.state === 'off' ? ' is-off' : '') })); }
+      seg.addEventListener('mouseenter', () => { hover = e; arc.classList.add('is-on'); label.textContent = e.label; centerIcon(e.icon); sub.textContent = e.state ? t('ui.' + e.state) : (e.sub ? '›' : (e.empty ? t('ui.empty') : '')); sub.className = 'rd__sub lxr-mono' + (e.state ? ' is-' + e.state : ''); post('sound', { name: 'NAV_UP' }); });
+      seg.addEventListener('mouseleave', () => { arc.classList.remove('is-on'); if (hover === e) { hover = null; label.textContent = current().title; centerIcon(null); sub.textContent = ''; sub.className = 'rd__sub lxr-mono'; } });
       seg.addEventListener('click', (ev) => { ev.stopPropagation(); if (e.sub) { stack.push({ title: e.label, list: e.sub }); draw(); post('sound', { name: 'SELECT' }); } else if (!e.empty) post('pick', { id: e.id }); });
     });
-    label.textContent = current().title; sub.textContent = ''; sub.className = 'rd__sub lxr-mono';
+    label.textContent = current().title; sub.textContent = ''; sub.className = 'rd__sub lxr-mono'; centerIcon(null);
     $('h-back').textContent = stack.length > 1 ? t('ui.back') : t('ui.close');
     $('h-close').textContent = t('ui.close');
   }
