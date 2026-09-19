@@ -8,7 +8,7 @@
 
 # lxr-radial — The action wheel for LXRCore v3
 
-![Version](https://img.shields.io/badge/version-1.0.0-c21c37)
+![Version](https://img.shields.io/badge/version-3.0.0-c21c37)
 ![Core](https://img.shields.io/badge/requires-lxr--core_v3-1a1512)
 ![NUI](https://img.shields.io/badge/NUI-vanilla_%C2%B7_no_build-brightgreen)
 

@@ -1,5 +1,8 @@
 # Changelog — lxr-radial
 
+## 3.0.0 — 2026-09-19
+* LXRCore v3 release line: every resource ships as 3.0.0 from here (the entries below are the road to it).
+
 ## 1.0.1 — 2026-09-19
 * *Clothing* hands over to lxr-clothingradial when that resource runs; the built-in ring stays as the fallback.
 
