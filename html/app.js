@@ -31,7 +31,15 @@
 
   function current() { return stack[stack.length - 1]; }
   const cico = document.getElementById('cico');
-  function centerIcon(name) { if (!name) { cico.classList.add('lxr-hidden'); return; } cico.classList.remove('lxr-hidden'); cico.querySelector('path').setAttribute('d', ICONS[name] || ICONS.paper); }
+  // wheel icon names -> library names (the wardrobe categories share their ids)
+  const LIB = { shirt: 'shirts_full', satchel: 'satchels', undress: 'outfits', dress: 'outfits', frame: 'mirror', whistle: 'horseshoe', jewelry_rings: 'jewelry', jewelry_rings_left: 'jewelry', jewelry_rings_right: 'jewelry', jewelry_bracelets: 'jewelry', jewelry_necklaces: 'necklaces', jewelry_earrings: 'earrings', coats_closed: 'coats', coats_heavy: 'coats', masks_large: 'masks', neckerchiefs: 'neckwear', holsters_left: 'holsters', holsters_right: 'holsters', holsters_crossdraw: 'holsters', gunbelt_accs: 'gunbelts', belt_buckles: 'belts', boot_accessories: 'spurs', loadouts: 'ammo', ammo_pistols: 'ammo', badges: 'badge' };
+  function centerIcon(name) {
+    if (!name) { cico.classList.add('lxr-hidden'); return; }
+    cico.classList.remove('lxr-hidden');
+    const lib = window.LXR_ICONS && window.LXR_ICONS[LIB[name] || name];
+    if (lib) { cico.innerHTML = lib.replace('<svg ', '<svg width="100%" height="100%" '); cico.classList.add('is-lib'); }
+    else { cico.innerHTML = `<path d="${ICONS[name] || ICONS.paper}"/>`; cico.classList.remove('is-lib'); }
+  }
   function draw() {
     const list = current().list;
     ring.innerHTML = '';
@@ -43,7 +51,9 @@
       const mid = (a0 + a1) / 2, [cx, cy] = polar((r0 + r1) / 2 + 2, mid);
       const sc = n > 8 ? 1.4 : 1.7;
       const g = el('g', { class: 'rd__ico', transform: `translate(${cx - 12 * sc} ${cy - 12 * sc}) scale(${sc})` });
-      g.appendChild(el('path', { d: ICONS[e.icon] || ICONS.paper }));
+      const lib = window.LXR_ICONS && window.LXR_ICONS[LIB[e.icon] || e.icon];
+      if (lib) { const t = document.createElement('template'); t.innerHTML = lib; const s = t.content.firstChild; s.setAttribute('width', 24); s.setAttribute('height', 24); s.setAttribute('class', 'rd__ico-lib'); g.appendChild(document.importNode(s, true)); }
+      else g.appendChild(el('path', { d: ICONS[e.icon] || ICONS.paper }));
       // the red arc on the rim, lit while the segment is under the cursor
       const arc = el('path', { d: segment(r1 + 3, r1 + 7, a0, a1), class: 'rd__arc' });
       ring.appendChild(seg); ring.appendChild(g); ring.appendChild(arc);

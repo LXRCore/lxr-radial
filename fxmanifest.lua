@@ -53,6 +53,7 @@ files {
     'html/lxr-ui.css',
     'html/style.css',
     'html/app.js',
+    'html/icons.js',   -- the LXR icon library (tools/icons/build.py)
     'html/img/*.png',
     'html/fonts/*.woff2',
 }
